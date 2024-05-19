@@ -1,0 +1,5 @@
+Make sure the file being read doesn't have extra new line at the end as this can throw off the size of array declarations and give inconsistent results. 
+
+If the array is too long, it may have a zero at the end. 
+
+Check both the example input and actual input files for this. 
