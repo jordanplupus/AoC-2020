@@ -1,0 +1,1 @@
+The old attempt would sum all characters in each string to create a unique integer for that string, but this failed to take into account that a different arrangement of numbers could sum to the same thing, so this doesn't work. 
