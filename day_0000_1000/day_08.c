@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void part2(int lines, int instructions[][3]);
-int part1(int lines, int instructions[][3]);
+int part1(int *acc, int lines, int instructions[][3]);
 
 long int getFileSize(char file_name[]) {
     FILE* file = fopen(file_name, "r");
@@ -68,15 +68,21 @@ int main() {
         j++;
     }
 
+    int x = 0;
+    int *acc = &x;
     part2(new_lines, instructions);
-    //part1(new_lines, instructions);    
+    //part1(acc, new_lines, instructions);    
+    //printf("%d\n", x);
 }
 
 void part2(int lines, int instructions[][3]) {
+    int x = 0;
+    int *acc = &x;
+
     for(int i=0; i<lines; i++) {
         if( instructions[i][0] == 0 || instructions[i][0] == 2 ) {
             instructions[i][0] = instructions[i][0] + 2 & 0x2;
-            if( !part1(lines, instructions) ) 
+            if( !part1(acc, lines, instructions) ) 
                 break;
             // below for-loop needed because part1 can modify instruction array in this function
             for(int j=0; j<lines; j++) { 
@@ -85,10 +91,13 @@ void part2(int lines, int instructions[][3]) {
             instructions[i][0] = instructions[i][0] + 2 & 0x2;
         }
     }
+
+    printf("%d\n", x);
 }
 
-int part1(int lines, int instructions[][3]) {
-    int acc = 0, looped = 0;
+int part1(int *acc, int lines, int instructions[][3]) {
+    int looped = 0;
+    *acc = 0;
 
     for(int i=0; i<lines; i++) {
         instructions[i][2]++;
@@ -99,14 +108,12 @@ int part1(int lines, int instructions[][3]) {
         }
         
         if( instructions[i][0] == 1 ) {
-            acc += instructions[i][1];
+            *acc += instructions[i][1];
         } 
         else if( instructions[i][0] == 2 ) {
             i += (instructions[i][1] - 1);
         } 
     }
 
-    if( !looped ) printf("\n");
-    printf("Accumulator = %d\n", acc);
     return looped;
 }
