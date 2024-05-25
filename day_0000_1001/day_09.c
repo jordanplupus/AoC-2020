@@ -112,7 +112,7 @@ void part1(int size, int preamble, long long nums[]) {
 
     releaseNodes(&head, &tail);
 
-    for(i=0; i<size; i++) {
+    for(i=0; sum != target && i<size; i++) {
         sum = nums[i]; 
         for(int j=i+1; sum<target && j<size; j++) {
             sum += nums[j];
@@ -128,8 +128,6 @@ void part1(int size, int preamble, long long nums[]) {
                 printf("Min + Max = %llu\n", (min + max));
             }
         }
-        if( sum == target) 
-            break;
     }
 }
 
