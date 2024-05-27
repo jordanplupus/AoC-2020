@@ -126,7 +126,7 @@ void part2(int lines, int nums[]) {
         if( possibilities[i] >= 2 ) {
             node[i] += node[i+2];
         }
-        if( possibilities[i] >= 3 ) {
+        if( possibilities[i] == 3 ) {
             node[i] += node[i+3];
         }
         printf("Val at %d:  %llu\n", i, node[i]);
